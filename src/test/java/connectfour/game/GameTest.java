@@ -50,8 +50,7 @@ public class GameTest {
         // Arrange
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        String input = "2\n2\n2\n"; // Ember játékos 2. oszlopba rakja a követ, majd a gépi játékos 2. oszlopba
-        // rakja a követ, majd az ember játékos 2. oszlopba rakja a követ
+        String input = "2\n2\n2\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         when(mockBoard.isColumnFull(anyInt())).thenReturn(false);
@@ -69,4 +68,32 @@ public class GameTest {
         String output = outContent.toString().trim();
         assertTrue(output.contains("Player S won!")); // A játékos S nyert
     }
+/*
+    @Test
+    public void testPlay_Computerwins(){
+        //Given
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String input = "2\n2\n2\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        //When
+        when(mockBoard.isColumnFull(anyInt())).thenReturn(false);
+        when(mockBoard.isFull()).thenReturn(false);
+        doReturn(new char[6][7]).when(mockBoard).getBoard();
+        doReturn(true).when(mockWinChecker).checkWin(any(char[][].class), eq('P'));
+
+        //Then
+
+        doNothing().when(mockBoard).displayBoard();
+        doNothing().when(mockBoard).dropPiece(anyInt(), eq('P'));
+
+
+        //Act
+        game.play();
+
+        String output = outContent.toString().trim();
+        assertTrue(output.contains("Player P won!"));
+
+    }*/
 }

@@ -10,21 +10,16 @@ public final class ConnectFour {
         throw new UnsupportedOperationException("Utility class");
     }
 
-    /**
-     * A játék main-je.
-     * @param args .
-     */
     public static void main(final String[] args) {
         System.out.println("Welcome to Connect 4!");
 
         Scanner scanner = new Scanner(System.in);
         Game game = new Game();
-        CommandHandler commandHandler = new CommandHandler();
 
-        // A start metódus meghívása a Scanner átadásával
+        // Start the command handler with the scanner and game
         CommandHandler.start(scanner, game);
 
+        // Close the scanner after the command handler has finished
         scanner.close();
-
-}
+    }
 }

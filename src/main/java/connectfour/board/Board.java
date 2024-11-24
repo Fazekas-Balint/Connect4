@@ -38,7 +38,7 @@ public class Board {
      * Tábla létrehozása.
      */
     public Board() {
-        board = new char[BoardConfig.ROWS.getIntValue()]
+        board = new char[BoardConfig.ROWS.getIntValue()] //VO
                 [BoardConfig.COLUMNS.getIntValue()];
         initializeBoard = new InitializeBoard();
         displayBoard = new DisplayBoard();

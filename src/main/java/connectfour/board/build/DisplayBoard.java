@@ -3,6 +3,9 @@ package connectfour.board.build;
 import connectfour.board.BoardConfig;
 
 public class DisplayBoard {
+
+
+    //classok átnvezése
     /**
      * A tábla megjelenítése.
      * @param board

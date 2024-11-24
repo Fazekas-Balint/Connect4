@@ -3,14 +3,10 @@ package connectfour.player;
 import java.util.Scanner;
 
 public class PlayerName {
-    /**
-     * Változó a névre.
-     */
+
     private static String name;
 
-    /**
-     * Konstruktor, ami bekéri a játékos nevét.
-     */
+
     public  PlayerName() {
         name = askForName();
     }
@@ -22,18 +18,15 @@ public class PlayerName {
         return scanner.nextLine().trim(); // Nevet bekérjük és visszaadjuk
     }
 
-    /**
-     * Játékos nevének lekérdezése.
-     * @return visszaadja a nevet
-     */
+    public static void setName(final String name) {
+        PlayerName.name = name;
+    }
+
     public static String getName() {
         return name;
     }
 
-    /**
-     * Játékos nevének kiírása.
-     */
-    public void printName() {
+    public static void printName() {
         System.out.println("Player's name: " + name);
     }
 }

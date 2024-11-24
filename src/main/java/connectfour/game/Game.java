@@ -3,6 +3,7 @@ package connectfour.game;
 import connectfour.board.Board;
 import connectfour.game.checker.WinChecker;
 import connectfour.player.PlayerName;
+import connectfour.db.PlayerDAO;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,6 +16,9 @@ public class Game {
     /**
      * Tábla változó.
      */
+
+    private PlayerDAO playerDAO;
+
     private Board board;
     /**
      * Jelenlegi játékos.
@@ -29,6 +33,7 @@ public class Game {
      */
     private WinChecker winChecker;
 
+    private boolean gameWon;
     /**
      * Tábla lekérése.
      * @return return
@@ -59,6 +64,8 @@ public class Game {
         currentPlayer = 'S'; // Az X játékos kezd
         random = new Random(); // Véletlenszám-generátor a gépi játékoshoz
         winChecker = new WinChecker(); // WinChecker példány létrehozása
+        playerDAO = new PlayerDAO();
+        gameWon = false;
 
     }
 
@@ -76,6 +83,7 @@ public class Game {
         this.random = mockRandom;
         this.winChecker = mockWinChecker;
     }
+
 
     /**
      * A játék menete.
@@ -96,12 +104,11 @@ public class Game {
 
                 do {
                     System.out.print("Choose a column (1-7): ");
-                    col = scanner.nextInt() - 1; // 0-tól indexelünk
+                    col = scanner.nextInt() - 1; // A 0-tól indexelés miatt
                 } while (col < 0 || col >= SEVEN || board.isColumnFull(col));
 
             } else {
-                System.out.println("Player "
-                        + currentPlayer + " move (Machine).");
+                System.out.println("Player " + currentPlayer + " move.");
 
                 do {
                     col = random.nextInt(SEVEN);
@@ -120,13 +127,27 @@ public class Game {
             } else {
                 currentPlayer = (currentPlayer == 'S') ? 'P' : 'S';
             }
+            if (gameWon) {
+                if (currentPlayer == 'P') {
+                    playerDAO.addWin("Machine");
+                } else {
+                    playerDAO.addWin(PlayerName.getName());
+                }
+            }
         }
 
         if (!gameWon) {
             System.out.println("The game is a draw!");
         }
 
-        scanner.close();
+        this.gameWon = gameWon;
     }
 
+    /**
+     * A játék megnyerésének ellenőrzése.
+     * @return gameWon
+     */
+    public boolean isGameWon() {
+        return gameWon;
+    }
 }

@@ -26,7 +26,7 @@ public class WinChecker {
                 }
             }
         }
-
+        //Ki lehet szervezni pl winchecker interface
         // Függőleges ellenőrzés
         for (int row = 0; row < rows - three; row++) {
             for (int col = 0; col < cols; col++) {
