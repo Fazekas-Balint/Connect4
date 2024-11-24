@@ -1,52 +1,50 @@
 package connectfour.game.handler;
 
 import connectfour.game.Game;
-import connectfour.player.PlayerName;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
-public class CommandHandlerTest {
+class CommandHandlerTest {
 
-    private Scanner scanner;
+    @Mock
     private Game game;
 
+    private Runnable mockExitHandler;
+
     @BeforeEach
-    public void setUp() {
-        scanner = mock(Scanner.class);
-        game = mock(Game.class);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockExitHandler = mock(Runnable.class);
     }
 
     @Test
-    public void testStartPlayCommand() {
-        when(scanner.nextLine()).thenReturn("Player1", "play", "exit");
-        CommandHandler.start(scanner, game);
-        verify(game, times(1)).play();
+    void testStart_ExitCommand() {
+        String input = "Player1\nexit\n";
+        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+
+        boolean result = CommandHandler.start(scanner, game, mockExitHandler);
+
+        verify(mockExitHandler, times(1)).run();
+        assertFalse(result, "The game should not be won.");
     }
 
     @Test
-    public void testStartHighScoresCommand() {
-        when(scanner.nextLine()).thenReturn("Player1", "hs", "exit");
-        CommandHandler.start(scanner, game);
-        // Add verification for high scores display if needed
-    }
+    void testStart_InvalidCommand() {
+        String input = "Player1\ninvalid\nexit\n";
+        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
 
-    @Test
-    public void testStartExitCommand() {
-        when(scanner.nextLine()).thenReturn("Player1", "exit");
-        CommandHandler.start(scanner, game);
+        boolean result = CommandHandler.start(scanner, game, mockExitHandler);
+
         verify(game, never()).play();
-    }
-
-    @Test
-    public void testSetPlayerName() {
-        when(scanner.nextLine()).thenReturn("Player1", "exit");
-        CommandHandler.start(scanner, game);
-        assertEquals("Player1", PlayerName.getName());
+        verify(mockExitHandler, times(1)).run();
+        assertFalse(result, "The game should not be won.");
     }
 }

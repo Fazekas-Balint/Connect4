@@ -13,7 +13,12 @@ public final class CommandHandler {
         throw new UnsupportedOperationException("Utility class");
     }
 
-    public static void start(final Scanner scanner, final Game game) {
+    public static boolean start(final Scanner scanner,
+                                final Game game,
+                                final Runnable exitHandler) {
+        Runnable safeExitHandler = (
+                exitHandler != null) ? exitHandler : () -> System.exit(0);
+
         System.out.print("Enter your name: ");
         String playerName = scanner.nextLine();
         PlayerName.setName(playerName);
@@ -25,16 +30,18 @@ public final class CommandHandler {
             if (command.equalsIgnoreCase("play")) {
                 game.play();
                 if (game.isGameWon()) {
-                    break;
+                    return true;
                 }
             } else if (command.equalsIgnoreCase("hs")) {
                 displayHighScores();
             } else if (command.equalsIgnoreCase("exit")) {
+                safeExitHandler.run();
                 break;
             } else {
                 System.out.println("Invalid command. Please try again.");
             }
         }
+        return false;
     }
 
     private static void displayHighScores() {
@@ -43,8 +50,8 @@ public final class CommandHandler {
 
         System.out.println("High Scores:");
         for (Map.Entry<String, Integer> entry : winCounts.entrySet()) {
-            System.out.println(entry.getKey()
-                    + ": " + entry.getValue() + " wins");
+            System.out.println(
+                    entry.getKey() + ": " + entry.getValue() + " wins");
         }
     }
 }

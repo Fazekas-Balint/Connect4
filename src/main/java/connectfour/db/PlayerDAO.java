@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerDAO {
-    private static final String URL = "jdbc:h2:tcp://localhost/~/test";
+    private static final String URL = "jdbc:h2:~/test";
     private static final String USER = "sa";
     private static final String PASSWORD = "";
 
     public PlayerDAO() {
         try {
-            //H2 driver
+
             Class.forName("org.h2.Driver");
 
             try (Connection connection =
