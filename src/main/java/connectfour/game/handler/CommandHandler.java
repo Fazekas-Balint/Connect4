@@ -13,10 +13,10 @@ public final class CommandHandler {
         throw new UnsupportedOperationException("Utility class");
     }
 
-    public static boolean start(final Scanner scanner,
-                                final Game game,
-                                final Runnable exitHandler) {
-        Runnable safeExitHandler = (
+    public static boolean start(
+            final Scanner scanner, final Game game,
+             final PlayerDAO playerDAO, final Runnable exitHandler) {
+        final Runnable safeExitHandler = (
                 exitHandler != null) ? exitHandler : () -> System.exit(0);
 
         System.out.print("Enter your name: ");
@@ -33,7 +33,7 @@ public final class CommandHandler {
                     return true;
                 }
             } else if (command.equalsIgnoreCase("hs")) {
-                displayHighScores();
+                displayHighScores(playerDAO);
             } else if (command.equalsIgnoreCase("exit")) {
                 safeExitHandler.run();
                 break;
@@ -44,8 +44,7 @@ public final class CommandHandler {
         return false;
     }
 
-    private static void displayHighScores() {
-        PlayerDAO playerDAO = new PlayerDAO();
+    private static void displayHighScores(final PlayerDAO playerDAO) {
         Map<String, Integer> winCounts = playerDAO.getWinCounts();
 
         System.out.println("High Scores:");

@@ -1,6 +1,7 @@
 package connectfour.main;
 
 import connectfour.board.Board;
+import connectfour.db.PlayerDAO;
 import connectfour.game.Game;
 import connectfour.game.handler.CommandHandler;
 import org.h2.tools.Server;
@@ -36,7 +37,7 @@ public final class ConnectFour {
         Game game = new Game();
 
         boolean gameEnded = CommandHandler.start(
-                scanner, game, () -> System.exit(0));
+                scanner, game, new PlayerDAO(), () -> System.exit(0));
 
         if (gameEnded) {
             System.out.println("Game over. Exiting...");
