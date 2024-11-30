@@ -29,7 +29,6 @@ public class WinCheckerTest {
 
     @Test
     void testHorizontalWin() {
-        // Tegyük az X-eket vízszintesen az első sorba
         board[0][0] = 'S';
         board[0][1] = 'S';
         board[0][2] = 'S';
@@ -41,7 +40,6 @@ public class WinCheckerTest {
 
     @Test
     void testVerticalWin() {
-        // Tegyük az X-eket függőlegesen az első oszlopba
         board[0][0] = 'S';
         board[1][0] = 'S';
         board[2][0] = 'S';
@@ -53,7 +51,6 @@ public class WinCheckerTest {
 
     @Test
     void testDiagonalWinLeftToRight() {
-        // Tegyük az X-eket átlósan balról jobbra
         board[0][0] = 'S';
         board[1][1] = 'S';
         board[2][2] = 'S';
@@ -65,7 +62,6 @@ public class WinCheckerTest {
 
     @Test
     void testDiagonalWinRightToLeft() {
-        // Tegyük az X-eket átlósan jobbról balra
         board[0][3] = 'S';
         board[1][2] = 'S';
         board[2][1] = 'S';

@@ -61,7 +61,7 @@ public class Game {
      */
     public Game() {
         board = new Board();
-        currentPlayer = 'S'; // Az X játékos kezd
+        currentPlayer = 'S'; // S - ember, P - gép
         random = new Random(); // Véletlenszám-generátor a gépi játékoshoz
         winChecker = new WinChecker(); // WinChecker példány létrehozása
         playerDAO = new PlayerDAO();
