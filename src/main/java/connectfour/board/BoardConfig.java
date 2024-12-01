@@ -1,26 +1,15 @@
 package connectfour.board;
 
 public enum BoardConfig  {
-    /**
-     * A sorok száma a táblán.
-     */
+
     ROWS(6),
-    /**
-     * Az oszlopok száma a táblán.
-     */
+
     COLUMNS(7),
-    /**
-     * Az üres mezők jelölése a táblán.
-     */
+
     EMPTY_SLOT('.');
 
-    /**
-     * Int érték.
-     */
     private final int intValue;
-    /**
-     * Karakterérték.
-     */
+
     private final char charValue;
 
     // Konstruktor az egész szám típusú értékekhez (ROWS és COLUMNS)

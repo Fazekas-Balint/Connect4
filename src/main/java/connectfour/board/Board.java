@@ -9,29 +9,17 @@ import connectfour.board.conditions.ColumnChecker;
 
 
 public class Board {
-    /**
-     * A tábla tömbje.
-     */
+
     private char[][] board;
-    /**
-     * InitializeBoard behivatkozása.
-     */
+
     private InitializeBoard initializeBoard;
-    /**
-     * DisplayBoard behivatkozása.
-     */
+
     private DisplayBoard displayBoard;
-    /**
-     * ColumnChecker behivatkozása.
-     */
+
     private ColumnChecker columnChecker;
-    /**
-     * PieceDropper behivatkozása.
-     */
+
     private PieceDropper pieceDropper;
-    /**
-     * BoardFullChecker behivatkozása.
-     */
+
     private BoardFullChecker boardFullChecker;
 
     /**

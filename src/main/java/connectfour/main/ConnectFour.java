@@ -52,10 +52,6 @@ public final class ConnectFour {
 
         scanner.close();
 
-        if (server != null) {
-            server.stop();
-            server.shutdown();
-        }
     }
 
     private static void saveBoardToFile(

@@ -9,31 +9,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    /**
-     * Magic number elkerülésére egy konstans.
-     */
+
     public static final int SEVEN = 7;
-    /**
-     * Tábla változó.
-     */
 
     private PlayerDAO playerDAO;
 
     private Board board;
-    /**
-     * Jelenlegi játékos.
-     */
+
     private char currentPlayer;
-    /**
-     * Random szám.
-     */
+
     private Random random;
-    /**
-     * WinChecker objektum a győzelem ellenőrzéséhez.
-     */
+
     private WinChecker winChecker;
 
     private boolean gameWon;
+
     /**
      * Tábla lekérése.
      * @return return
